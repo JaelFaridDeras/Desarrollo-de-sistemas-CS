@@ -1,0 +1,23 @@
+<%include _header%>
+    <br>
+    <h1> Bienvenido a la guarida zombie!</h1>
+    <div class="list-group">
+  <a class="list-group-item list-group-item-primary">
+    Miembros Zombies
+  </a>
+    <% zombies.forEach((zombies)=> {%>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a  href="/zombies/<%= zombies.username %>" class="list-group-item list-group-item-action" >
+                    <%= zombies.name() %>
+                </a>
+            </div>
+            <% if(zombies.bio){ %>
+                <div class="panel-body">
+                    <%= zombies.bio %>
+                </div>
+                <% } %>
+        </div>
+        <%})%>
+
+            <%include _footer%>

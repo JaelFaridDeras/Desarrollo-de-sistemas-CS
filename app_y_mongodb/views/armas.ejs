@@ -1,0 +1,33 @@
+<%include _header%>
+    <h1>Agregar arma</h1>
+    <br>
+    <form action="/armas" method="post">
+        <div class="container">
+            <div class="form-group">
+                <input name="descripcion" type="text" class="form-control" placeholder="Ingresa Descripcion de arma" required autofocus>
+            </div>
+            <div class="form-group">
+                <input name="fuerza" type="text" class="form-control" placeholder="fuerza" required>
+            </div>
+            <div class="form-group">
+                <input name="categoria" type="text" class="form-control" placeholder="categoria" required>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="municion" id="exampleRadios2" value="true" checked>
+                <label class="form-check-label" for="exampleRadios2">
+    Si tiene municion
+  </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="exampleRadios2" name="municion" value="false">
+                <label class="form-check-label" for="exampleRadios2">
+    No tiene municion
+  </label>
+            </div>
+            <br>
+            <input type="submit" value="Agregar arma" class="btn btn-primary btn-block">
+        </div>
+    </form>
+    <%include _footer%>

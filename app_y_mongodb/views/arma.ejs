@@ -1,0 +1,19 @@
+<%include _header%>
+    <br>
+    <h1> Bienvenido a la guarida armas!</h1>
+    <div class="list-group">
+  <a class="list-group-item list-group-item-primary">
+    
+  </a>
+    <% armas.forEach((armas)=> {%>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a  href="/armas/<%= armas.descripcion %>" class="list-group-item list-group-item-action" >
+                    <%= armas.descripcion %>
+                </a>
+            </div>
+          
+        </div>
+        <%})%>
+
+            <%include _footer%>
