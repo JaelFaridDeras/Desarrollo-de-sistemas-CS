@@ -30,7 +30,19 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/logout">salir</a>
                     </li>
-                    <% } else {%>
+                    <li>
+                        <a href="/armas">Registrar arma</a>
+                        </li>
+                        <li>
+                        <a href="/arma">Armas Registradas</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Salir</a>
+                        </li>
+                        <li>
+                            <a> <%= currentZombie.rol()%></a>
+                        </li>
+                     <% } else {%>
                         <li class="nav-item active">
                             <a class="nav-link" href="/login">Entrar</a>
                         </li>
@@ -55,6 +67,6 @@
 
                 <% info.forEach(function(info) { %>
                     <div class="alert alert-info" role="alert">
-                        <%= info %>
+                        <% info %>
                     </div>
                     <%})%>

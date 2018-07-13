@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Zombie Nest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+<a class="navbar-brand" href="/">Zombie nest</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+<div class="collapse navbar-collapse" id="navbarNavDropdown">
+	<ul class="navbar-nav">
+        <% if (currentZombie){ %>
+        
+        <li  class="nav-item active">
+            <a class="nav-link" href="/edit">
+            Hola, <%= currentZombie.name()%>
+            </a>
+        </li>
+        <li  class="nav-item active">
+        <a class="nav-link" href="/re-weapons">Registrar arma</a>
+        </li>
+        <li  class="nav-item active">
+        <a class="nav-link" href="/weapons">Armas Registradas</a>
+        </li>
+        <li  class="nav-item active">
+            <a class="nav-link" href="/logout">Salir</a>
+		</li>
+		<li>
+			<a> <%= currentZombie.rol()%></a>
+		</li>
+        <% } else {%>  
+            
+
+        <li  class="nav-item active">
+            
+            <a class="nav-link" href="/login">Entrar</a>
+            
+        </li>
+        <li  class="nav-item active">
+            <a class="nav-link" href="/signup">Registrarse</a>
+        </li>
+    
+        <% } %>
+		</ul>
+        </div>
+
+    </div>
+<div class="container">
+    <% errors.forEach(function(error) { %>
+        <div class="alert alert-danger" role="alert">
+    <%= error %>
+        </div>
+    <% }) %>
+    <% infos.forEach(function(info) { %>
+        <div class= "alert alert-info" role="alert">
+    <%  info %>
+        </div>
+    <% }) %>
+    

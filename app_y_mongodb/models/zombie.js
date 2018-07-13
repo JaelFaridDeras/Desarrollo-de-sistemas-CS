@@ -21,6 +21,7 @@ var zombieSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    role:String,
     bio: String
 });
 
@@ -54,6 +55,9 @@ zombieSchema.methods.checkPassword = function(guess, done){
 
 };
 zombieSchema.methods.name = function () {
+    return this.displayName || this.username;
+};
+zombieSchema.methods.name = function(){
     return this.displayName || this.username;
 };
 var Zombie = mongoose.model("Zombie", zombieSchema);

@@ -3,12 +3,28 @@ var Zombie = require("./models/zombie");
 var Arma = require("./models/armas");
 
 var passport = require("passport");
+var acl = require("express-acl");
 var router = express.Router();
+
+acl.config({
+
+    baseUrl:'/',
+    defaulRole:'zombie',
+    decodeObjectName:'zombie',
+    roleSearchPath:'zombie.role',
+    
+
+});
+router.use(acl.authorize);
 
 router.use(function (require, Response, next) {
     Response.locals.currentZombie = require.zombie;
     Response.locals.errors = require.flash("error");
     Response.locals.info = require.flash("info");
+    if(require.isAuthenticated()){
+        require.session.role = require.zombie.role;
+    }
+    console.log(require.zombie);
     next();
 });
 
@@ -103,7 +119,7 @@ router.get("/signup", function (require, Response) {
 router.post("/signup", function (require, Response, next) {
     var username = require.body.username;
     var password = require.body.password;
-
+    var role = require.body.role;
     Zombie.findOne({
         username: username
     }, function (err, zombie) {
@@ -116,10 +132,56 @@ router.post("/signup", function (require, Response, next) {
         }
         var newZombie = new Zombie({
             username: username,
-            password: password
+            password: password,
+            role:role
         });
         newZombie.save(next);
         return Response.redirect("/");
     });
 });
+
+router.get("/login",function(require,Response){
+    Response.render("login");
+});
+
+router.post("/login",passport.authenticate("login",{
+    successRedirect:"/",
+    failureRedirect:"/login",
+    failureFlash: true
+}));
+
+router.get("/logout",function(require,Response){
+    require.logout();
+    Response.redirect("/");
+});
+
+router.get("/edit",ensureAuthenticated, function(require,Response){
+    Response.render("edit");
+});
+
+router.post("/edit", ensureAuthenticated,function(require,Response,next){
+    require.zombie.displayName = require.body.displayName;
+        require.zombie.bio = require.body.bio;
+        require.zombie.save(function(err){
+            if(err){
+                next(err);
+                return;
+            }
+            Response.flash("info","Perfil Actualizado");
+            Response.redirect("/edit");
+        });
+});
+
+
+
+
+function ensureAuthenticated(require,Response,next){
+    if(require.isAuthenticated()){
+        next();
+    }else{
+        require.flash("info","Necesitas iniciar sesión para poder ver esta sección");
+        Response.redirect("/login");
+    }
+}
+
 module.exports = router;

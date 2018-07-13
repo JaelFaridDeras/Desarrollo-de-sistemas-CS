@@ -1,0 +1,26 @@
+<% include _header %>
+<h1> Mostrar Armas</h1>
+    <div class="col-md-9">
+        <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+              <th>Arma</th>
+              <th>Fuerza</th>
+              <th>Categoria</th>
+              <th>Municion</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% weapons.forEach((weapon)=>{ %>
+                <tr>
+                    <td><%= weapon.description %></td>
+                    <td><%= weapon.force %></td>
+                    <td><%= weapon.category %></td>
+                    <td><%= weapon.ammo %></td>
+                  </tr>
+              <% }) %>
+          </tbody>
+        </table>
+    </div>
+
+    <% include _footer %>
